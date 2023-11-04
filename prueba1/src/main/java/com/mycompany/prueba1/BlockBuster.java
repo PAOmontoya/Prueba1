@@ -50,16 +50,21 @@ public static int months(Calendar fechaRenta, Calendar fechaActual){
     return meses;
 }
 
-public String auditarMovieEstados(){
-    String movies="";
-    for(int i=0;i<BlockBuster.items.size();i++){
-        BlockBusterItem item=BlockBuster.items.get(i);
-        if(item instanceof MovieItem){
-            movies+="Name: "+item.getNombre()+"  Estado: "+((MovieItem) item).getEstado()+"\n";
-        }
-        
+public String auditarMovieEstados(int i){
+     if (i >= BlockBuster.items.size()) {
+        return "";
     }
-    return movies;
+    
+    BlockBusterItem item = BlockBuster.items.get(i);
+    String movieInfo = "";
+
+    if (item instanceof MovieItem) {
+        movieInfo = "Name: " + item.getNombre() + "  Estado: " + ((MovieItem) item).getEstado() + "\n";
+    }
+    
+    // Llama recursivamente a la función con el siguiente índice
+    return movieInfo + auditarMovieEstados(i + 1);
+
 }
 
 }
