@@ -17,7 +17,6 @@ com\mycompany\prueba1\auditarMovieWIN$2.class
 com\mycompany\prueba1\mainMenuWIN$1.class
 com\mycompany\prueba1\rentarWIN$1.class
 com\mycompany\prueba1\auditarMovieWIN$1.class
-com\mycompany\prueba1\VideoGameItem$consola.class
 com\mycompany\prueba1\mainMenuWIN$4.class
 com\mycompany\prueba1\Prueba1.class
 com\mycompany\prueba1\rentarWIN$3.class
@@ -26,4 +25,5 @@ com\mycompany\prueba1\agregarItemWIN.class
 com\mycompany\prueba1\buscarItemWIN$2.class
 com\mycompany\prueba1\mainMenuWIN$2.class
 com\mycompany\prueba1\rentarWIN$2.class
+com\mycompany\prueba1\auditarMovieWIN$3.class
 com\mycompany\prueba1\VideoGameItem.class

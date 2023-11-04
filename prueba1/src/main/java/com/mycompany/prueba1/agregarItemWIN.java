@@ -11,7 +11,7 @@ import javax.swing.JOptionPane;
  * @author telip
  */
 public class agregarItemWIN extends javax.swing.JFrame {
-    BlockBuster bb = new BlockBuster ();
+    BlockBuster bb= new BlockBuster();
 
     /**
      * Creates new form agregarItemWIN
@@ -138,10 +138,16 @@ public class agregarItemWIN extends javax.swing.JFrame {
       String nombre=nombreFIELD.getText();
       int codigo= Integer.parseInt(codigoFIELD.getText());
       String consola=altComboBox.getSelectedItem().toString();
-      if(consola==null){
-          consola="";
+      
+      if(bb.buscarItem(codigo, tipo)==null){
+         bb.agregarItem(codigo, nombre, tipo);
+      JOptionPane.showMessageDialog(null, "Item agregado exitosamente");
+      }else{
+          JOptionPane.showMessageDialog(null,"Ya existe ese codigo");
       }
-      bb.agregarItem(codigo, nombre, tipo, consola);
+      
+      
+      
       
     }//GEN-LAST:event_jButton3ActionPerformed
 

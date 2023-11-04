@@ -1,34 +1,52 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package com.mycompany.prueba1;
 
 import java.util.Calendar;
 
-/**
- *
- * @author ferna
- */
 public abstract class BlockBusterItem {
-    protected int codigo;
     protected String nombre;
-    protected double precio_renta;
+    protected int codigo;
+    protected double precioRenta;
     protected Calendar fecha;
 
-    public BlockBusterItem(int codigo, String nombre, double precio_renta) {
-        this.codigo = codigo;
+    public BlockBusterItem(String nombre, int codigo, double precioRenta) {
         this.nombre = nombre;
-        this.precio_renta = precio_renta;
-        fecha= Calendar.getInstance();
-    }
-    @Override
-    public String toString(){
-        return "Codigo: "+codigo+" Nombre: "+nombre+" Precio de renta:  "+precio_renta;
-    }
-     
-    public abstract double pagoRenta(int dias);
+        this.codigo = codigo;
+        this.precioRenta = precioRenta;
+        fecha=Calendar.getInstance();
         
+    }
     
+    
+    public String toString() {
+        return "Nombre: "+nombre+", Código: "+codigo+", Precio de renta: Lps. "+precioRenta;
+    }
+    public abstract double pagoRenta(int dias); 
+
+    public Calendar getFecha(){
+        return fecha;
+    }
+    
+    public double getPrecio(){
+        return precioRenta;
+    }
+    
+    public int getCodigo(){
+        return codigo;
+    }
+    
+    public String getNombre(){
+        return nombre;
+    }
+    
+    public static int days(Calendar fechaRenta, Calendar fechaActual){
+    long diferenciaMillis = fechaActual.getTimeInMillis()-fechaRenta.getTimeInMillis();
+    int dias = (int) (diferenciaMillis/ (1000*60*60*24));
+    return dias;
+}
+    
+    public static int months(Calendar fechaRenta, Calendar fechaActual){
+        int anos=fechaActual.get(Calendar.YEAR)-fechaRenta.get(Calendar.YEAR);
+        return 0;
+    }
     
 }

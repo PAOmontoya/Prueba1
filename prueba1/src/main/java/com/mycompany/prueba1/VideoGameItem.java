@@ -1,29 +1,24 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package com.mycompany.prueba1;
 
-/**
- *
- * @author ferna
- */
 public class VideoGameItem extends BlockBusterItem{
-    private String console;
-    public VideoGameItem(int code,String name,double rent,String console){
-        super(code,name,rent);
-        this.console=console;
-    }
+    String consola;
+    String PS="Playstation", XB="XBox", W="Wii";
+    
     @Override
     public String toString(){
-        return super.toString()+" Game";
+        return super.toString()+" - Game";
     }
-    public enum consola{
-        PLAYSTATION,XBOX,WII;
-    }
-  
+    
+    @Override
     public double pagoRenta(int dias){
-        return super.precio_renta*dias;
+        return precioRenta*dias;
     }
+
+    public VideoGameItem(String nombre, int codigo, double precioRenta, String console) {
+        super(nombre, codigo, precioRenta=30);
+        consola=console;
+        
+    }
+    
     
 }

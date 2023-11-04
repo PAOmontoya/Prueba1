@@ -1,62 +1,65 @@
 package com.mycompany.prueba1;
 
 import java.util.ArrayList;
-import javax.swing.JOptionPane;
+import java.util.Calendar;
 
-/**
- *
- * @author ferna
- */
 public class BlockBuster {
-    public BlockBusterItem movie_item;
-    public BlockBusterItem game_item;
-    public ArrayList<BlockBusterItem> items;
-    
-    public BlockBuster(){
-         
+static ArrayList<BlockBusterItem> items= new ArrayList<BlockBusterItem>();
+
+MovieItem movieItem= new MovieItem("",0,0);
+
+public BlockBusterItem buscarItem(int codigo, String tipo){
+    for(int i=0; i<BlockBuster.items.size();i++){
+        BlockBusterItem item=BlockBuster.items.get(i);
+        int code=item.getCodigo();
+        String type="";
+        if(item instanceof MovieItem){
+            type="Movie";
+        }else if(item instanceof VideoGameItem){
+            type="Game";
+        }
+        
+        if(codigo==code && tipo.equals(type)){
+            return BlockBuster.items.get(i);
+        }
     }
-    public BlockBusterItem buscarItem(int codigo, String tipo){
-        if(tipo.equalsIgnoreCase("movie")){
-        for(int i=0;i<items.size();i++){
-            if(codigo==items.get(i).codigo)
-                return items.get(i);
-            return null;
-        }}
-        else if(tipo.equalsIgnoreCase("game")){
-            for(int i=0;i<items.size();i++){
-               if(codigo==items.get(i).codigo)
-                return items.get(i);
-            return null;
-            }
-        }return null;
+    return null;
+}
+
+public void agregarItem(int codigo, String nombre, String tipoItem){
+    if(tipoItem.equals("Movie")){
+        MovieItem item = new MovieItem(nombre,codigo,50);
+        BlockBuster.items.add(item);
+    } else if(tipoItem.equals("Game")){
+        VideoGameItem item = new VideoGameItem(nombre,codigo,30,"");
+        BlockBuster.items.add(item);
+    }
+}
+
+public int days(Calendar fechaRenta, Calendar fechaActual){
+    long diferenciaMillis = fechaActual.getTimeInMillis()-fechaRenta.getTimeInMillis();
+    int dias = (int) (diferenciaMillis/ (1000*60*60*24));
+    return dias;
+}
+
+public static int months(Calendar fechaRenta, Calendar fechaActual){
+    int anos= fechaActual.get(Calendar.YEAR) - fechaRenta.get(Calendar.YEAR);
+    int meses1 = fechaActual.get(Calendar.MONTH) - fechaRenta.get(Calendar.MONTH);
+    int meses= anos*12+meses1;
+    
+    return meses;
+}
+
+public String auditarMovieEstados(){
+    String movies="";
+    for(int i=0;i<BlockBuster.items.size();i++){
+        BlockBusterItem item=BlockBuster.items.get(i);
+        if(item instanceof MovieItem){
+            movies+="Name: "+item.getNombre()+"  Estado: "+((MovieItem) item).getEstado()+"\n";
+        }
         
     }
-    public void agregarItem(int codigo, String nombre, String tipoItem,String console){
-        if(tipoItem.equalsIgnoreCase("Movie")&&buscarItem(codigo,nombre)==null){
-            movie_item=new MovieItem(codigo,nombre,50);
-            items.add(movie_item);
-            JOptionPane.showMessageDialog(null, "Movie agregada exitosamente");
-        }
-        else if(tipoItem.equalsIgnoreCase("Game")&&buscarItem(codigo,nombre)==null){
-            game_item= new VideoGameItem(codigo,nombre,30,console);
-            items.add(game_item);
-            JOptionPane.showMessageDialog(null, "Game agregado exitosamente");
-        }
-    }
-    public String rentar(int codigo, String tipoItem,int dias){
-        if(buscarItem(codigo,tipoItem)!=null){
-            return "Monto a pagar: "+buscarItem(codigo,tipoItem).pagoRenta(dias);
-        }
-        else return "Item no existe";
-    }
-    public int auditarMovieEstados(int n){
-        if(n<items.size()){
-            if(items.get(n).equals(movie_item)){
-                
-            }
-                        
-            return auditarMovieEstados(n+1);}
-        return 0;
-    } 
-    
+    return movies;
+}
+
 }
